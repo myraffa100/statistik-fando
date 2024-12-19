@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Penjualan Shopee 2024</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    canvas {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Penjualan Shopee Tahun 2024</h1>
+  
+  <!-- Tabel Data -->
+  <table>
+    <thead>
+      <tr>
+        <th>Bulan</th>
+        <th>Penjualan (Juta Rp)</th>
+      </tr>
+    </thead>
+    <tbody id="data-table">
+      <!-- Data akan diisi oleh JavaScript -->
+    </tbody>
+  </table>
+  
+  <!-- Diagram Batang -->
+  <canvas id="salesChart" width="400" height="200"></canvas>
+
+  <script>
+    // Dataset penjualan bulanan tahun 2024
+    const data = [
+      { bulan: "Januari", penjualan: 450 },
+      { bulan: "Februari", penjualan: 520 },
+      { bulan: "Maret", penjualan: 610 },
+      { bulan: "April", penjualan: 580 },
+      { bulan: "Mei", penjualan: 630 },
+      { bulan: "Juni", penjualan: 700 },
+      { bulan: "Juli", penjualan: 750 },
+      { bulan: "Agustus", penjualan: 720 },
+      { bulan: "September", penjualan: 680 },
+      { bulan: "Oktober", penjualan: 790 },
+      { bulan: "November", penjualan: 850 },
+      { bulan: "Desember", penjualan: 900 }
+    ];
+
+    // Menampilkan tabel data
+    const tableBody = document.getElementById("data-table");
+    data.forEach(item => {
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${item.bulan}</td><td>${item.penjualan}</td>`;
+      tableBody.appendChild(row);
+    });
+
+    // Membuat diagram batang dengan Chart.js
+    const ctx = document.getElementById("salesChart").getContext("2d");
+    const chart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: data.map(item => item.bulan),
+        datasets: [{
+          label: "Penjualan (Juta Rp)",
+          data: data.map(item => item.penjualan),
+          backgroundColor: "skyblue",
+          borderColor: "black",
+          borderWidth: 1,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: true,
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 100,
+            },
+          },
+        },
+      },
+    });
+  </script>
+</body>
+</html>
